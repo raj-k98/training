@@ -7,36 +7,5 @@
     http://www.springframework.org/schema/context/ 
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id='address1' class='com.beans.Address'>
-		<property name='location' value='Abc Colony' />
-		<property name='city' value='Hyderabad' />
-		<property name='pinCode' value='500081' />
-	</bean>
-
-	<bean id='address2' class='com.beans.Address'>
-		<property name='location' value='Claimers Society' />
-		<property name='city' value='Delhi' />
-		<property name='pinCode' value='110001' />
-	</bean>
-
-	<bean id='address3' class='com.beans.Address'>
-		<constructor-arg value="Bengalurur"></constructor-arg>
-		<constructor-arg value="345123"></constructor-arg>
-		<constructor-arg value="location abcd"></constructor-arg>
-	</bean>
-
-	<bean id='dept2' class='com.beans.Department'>
-		<property name='departmentId' value='20' />
-		<property name='departmentName' value='Technical' />
 	
-	</bean>
-
-	<bean id='emp1' class='com.beans.Employee'>
-		<property name='empId' value='1011' />
-		<property name='name' value='Ramesh' />
-		<property name='salary' value='9000' />
-		<property name='address' ref='address1' />
-		<property name='department' ref='dept2' />
-	</bean>
-
 </beans>
