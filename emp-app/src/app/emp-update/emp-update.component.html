@@ -1,0 +1,23 @@
+<div class='emp'>
+    <table class='table'>
+        <tr>
+            <td>Employee Id</td>
+            <td><input type='text' [(ngModel)]='emp.empid' readonly></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td><input type='text' [(ngModel)]='emp.name'></td>
+        </tr>
+        <tr>
+            <td>Salary</td>
+            <td><input type='text' [(ngModel)]='emp.salary'></td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td><input type='text' [(ngModel)]='emp.gender'></td>
+        </tr>
+        <button (click)='updated()' class='btn btn-success'>Dismiss</button>
+
+    </table>
+
+</div>
