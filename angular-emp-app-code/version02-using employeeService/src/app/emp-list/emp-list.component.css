@@ -1,4 +1,4 @@
-.emptbl{
+.maindiv{
     border:2px solid green;
     border-radius: 10px;
     margin:20px;
@@ -7,3 +7,7 @@
     float:left;
 }
 
+.subdiv {
+    border:none;
+    width:400;
+}

@@ -1,4 +1,4 @@
-<div class='emptbl'>
+<div class='maindiv'>
     <h3 style='text-align:center;'>{{header}}</h3>
     <table class='table'>
         <tr>
@@ -30,11 +30,11 @@
     <button (click)='createNew()' class='btn btn-primary btn-block'>Create New Employee</button>
 </div>
 
-<div class='emptbl'  *ngIf='create'>
+<div class='maindiv subdiv'  *ngIf='create'>
     <create-employee (completed)='afterCreate($event)'></create-employee>
 </div>
 
-<div class='emptbl'  *ngIf='updatePosition != null'>
+<div class='maindiv subdiv'  *ngIf='updatePosition != null'>
     <emp-update  [position]='updatePosition' (completed)='updateComplete($event)' ></emp-update>
 </div>
  
