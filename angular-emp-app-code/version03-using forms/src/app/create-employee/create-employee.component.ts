@@ -28,6 +28,6 @@ export class CreateEmployeeComponent implements OnInit {
     if (result)
       this.message = result;
     else
-      this.completed.emit("completed");
+      this.completed.emit("created");
   }
 }

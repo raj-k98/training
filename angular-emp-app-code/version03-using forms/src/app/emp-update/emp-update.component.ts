@@ -9,19 +9,20 @@ import { EmployeeService } from '../employee.service';
 })
 export class EmpUpdateComponent implements OnInit {
 
-  constructor(private service:EmployeeService) { }
-
-  ngOnInit() {
-    this.employee=this.service.getEmployee(this.position);
-  }
-
-  @Input() position:number
+  @Input() position: number
   @Output() completed = new EventEmitter();
 
-  employee:Employee;
+  employee: Employee;
+
+  constructor(private service: EmployeeService) { }
+
+  ngOnInit() {
+    this.employee = this.service.getEmployee(this.position);
+  }
+
 
   updated() {
-      this.service.updateEmployee(this.position,this.employee);
-      this.completed.emit("Employee Data Updated");
+    this.service.updateEmployee(this.position, this.employee);
+    this.completed.emit("Employee Data Updated");
   }
 }
