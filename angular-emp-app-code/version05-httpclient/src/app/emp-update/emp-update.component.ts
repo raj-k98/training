@@ -10,12 +10,12 @@ import { EmployeeService } from '../employee.service';
   styleUrls: ['./emp-update.component.css']
 })
 export class EmpUpdateComponent implements OnInit {
-  employee: Employee;
+  employee: Employee=null;
 
   validationMessages: string[] = null;
   errorMessage: string = null;
   successMessage: string = null;
-  dataFound: boolean = false;
+  
   constructor(private service: EmployeeServerService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -27,11 +27,9 @@ export class EmpUpdateComponent implements OnInit {
         this.service.getEmployee(eid).subscribe(
           (data) => {
             this.employee = data
-            this.dataFound=true
           },
           (fail) => {
             this.errorMessage = fail.error.errorMessage;
-            this.dataFound = false;
           }
         )
       }
