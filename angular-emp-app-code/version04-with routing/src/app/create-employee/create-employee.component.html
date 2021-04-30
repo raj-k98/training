@@ -37,8 +37,6 @@
 
         <button type='submit' class='btn btn-primary btn-block' [disabled]='empForm.invalid'>Submit</button>
     </form>
-
-    <button (click)='cancel()' class='btn btn-danger btn-block'>Cancel</button>
-    <p *ngIf='message != null' class='alert alert-danger'>{{message}}</p>
-    {{empForm.value|json}}
+    <p *ngIf='message != null'  (click)='message=null'
+                  [ngClass]="success? 'alert alert-success':'alert alert-danger'">{{message}}</p>
 </div>

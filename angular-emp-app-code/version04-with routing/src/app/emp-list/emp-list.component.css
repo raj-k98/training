@@ -1,13 +1,8 @@
-.emp{
+.maindiv{
     border:2px solid green;
     border-radius: 10px;
     margin:20px;
     margin:5px;
-    width:400px;
+    width:600px;
     float:left;
-}
-
-
-input.ng-touched.ng-invalid{
-    border: 3px solid red;
 }
