@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-
 @ControllerAdvice
 public class ApplicationErrorHandler extends ResponseEntityExceptionHandler  {
 
@@ -44,13 +43,12 @@ public class ApplicationErrorHandler extends ResponseEntityExceptionHandler  {
 
 		return new ResponseEntity<>(errorBody, HttpStatus.BAD_REQUEST);
 	}
-
+	
 	@ExceptionHandler(EmptyDataException.class)
 	public ResponseEntity<?> handleEmptyData(EmptyDataException ex) {
 		Map<String, Object> errorBody = new LinkedHashMap<>();
 		errorBody.put("errorMessage", ex.getMessage());
 		return new ResponseEntity<>(errorBody, HttpStatus.NOT_FOUND);
-
 	}
 
 	@ExceptionHandler(EmployeeNotFoundException.class)

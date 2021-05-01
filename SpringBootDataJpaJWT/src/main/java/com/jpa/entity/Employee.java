@@ -22,7 +22,7 @@ public class Employee {
 	private int empid;
 
 	@NotNull(message = "Name is Required")
-	@Length(min = 5, max = 20,message="Length of name sgould be betwwen 5 and 20")
+	@Length(min = 5, max = 20,message="Length of name should be between 5 and 20")
 	private String name;
 
 	@Range(min = 10000, max = 35000,message="Salary should be in the range of 10000 and 35000")

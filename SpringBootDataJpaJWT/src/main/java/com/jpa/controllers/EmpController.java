@@ -17,14 +17,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpServerErrorException;
 
 import com.jpa.entity.Employee;
 import com.jpa.exceptions.EmployeeNotFoundException;
 import com.jpa.exceptions.EmptyDataException;
 import com.jpa.exceptions.InvalidUserException;
-
+import com.jpa.jwt.JwtTokenUtil;
 import com.jpa.service.EmployeeService;
+
+import io.jsonwebtoken.SignatureException;
 
 @RestController
 @RequestMapping("employees")
@@ -33,9 +34,13 @@ public class EmpController {
 
 	@Autowired
 	EmployeeService service;
-	
+
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+
 	@GetMapping(value = "{eid}")
-	public ResponseEntity<Employee> getEmployee(@PathVariable("eid") int empId) {
+	public ResponseEntity<Employee> getEmployee(@PathVariable("eid") int empId,HttpServletRequest request) {
+		validateToken(request);
 		Employee e = service.get(empId);
 
 		if (e == null)
@@ -45,8 +50,8 @@ public class EmpController {
 	}
 
 	@GetMapping
-	public List<Employee> getAllEmployees() {
-
+	public List<Employee> getAllEmployee(HttpServletRequest request) {
+		validateToken(request);
 		List<Employee> list = service.getAll();
 		if (list.size() == 0)
 			throw new EmptyDataException("No employees in database");
@@ -56,13 +61,16 @@ public class EmpController {
 	}
 
 	@PostMapping
-	public String saveEmployee(@Valid @RequestBody Employee e) {
+	public String saveEmployee(@Valid @RequestBody Employee e,HttpServletRequest request) {
+		validateToken(request);
 		service.add(e);
 		return "Employee Data successfully saved";
+
 	}
 
 	@PutMapping
-	public String updatemployee(@Valid @RequestBody Employee e) {
+	public String updatemployee(@Valid @RequestBody Employee e,HttpServletRequest request) {
+		validateToken(request);
 		if (service.update(e))
 			return "Employee data successfully updated";
 		else
@@ -70,11 +78,33 @@ public class EmpController {
 	}
 
 	@DeleteMapping("{eid}")
-	public String deleteEmployee(@PathVariable("eid") int id) {
+	public String deleteEmployee(@PathVariable("eid") int id,HttpServletRequest request) {
+		validateToken(request);
 		if (service.delete(id))
 			return "Employee data successfully deleted";
 		else
 			throw new EmployeeNotFoundException("Delete", "Employee with Id " + id + " to delete not found");
+	}
+
+	public void validateToken(HttpServletRequest request) {
+		final String tokenHeader = request.getHeader("Authorization");
+
+		String jwtToken = null;
+
+		if (tokenHeader == null)
+			throw new InvalidUserException("User Not Logged In or token not included");
+		// JWT Token is in the form "Bearer token". Remove Bearer word
+		if (!tokenHeader.startsWith("Bearer "))
+			throw new InvalidUserException("Invalid Token");
+
+		jwtToken = tokenHeader.substring(7);
+		try {
+			if (!(jwtTokenUtil.validateToken(jwtToken)))
+				throw new InvalidUserException("Token Expired. Need Relogin");
+
+		} catch (SignatureException ex) {
+			throw new InvalidUserException("Invalid Token");
+		}
 	}
 
 }
