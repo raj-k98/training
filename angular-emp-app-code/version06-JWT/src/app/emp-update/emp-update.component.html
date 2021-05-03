@@ -1,0 +1,35 @@
+<div class='emp'>
+    <div *ngIf='employee != null'>
+        <table class='table'>
+            <tr>
+                <td>Employee Id</td>
+                <td><input type='text' [(ngModel)]='employee.empid' readonly></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td><input type='text' [(ngModel)]='employee.name'></td>
+            </tr>
+            <tr>
+                <td>Salary</td>
+                <td><input type='text' [(ngModel)]='employee.salary'></td>
+            </tr>
+        </table>
+        <button (click)='updated()' class='btn btn-success btn-block'>Update</button>
+        <button (click)='goBack()' class='btn btn-primary btn-block'>Back</button>
+
+        <p class='alert alert-success' *ngIf='successMessage != null' (click)='successMessage=null'>
+            {{successMessage}}
+        </p>
+
+    </div>
+
+    <div *ngIf='errorMessage != null' class='alert alert-danger' (click)='errorMessage=null'>
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf='validationMessages != null' (click)='validationMessages=null'>
+        <p *ngFor='let msg of validationMessages' class='alert alert-danger'>
+            {{msg}}
+        </p>
+    </div>
+</div>
