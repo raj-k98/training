@@ -9,4 +9,5 @@ public interface Shape {
 		System.out.println("Areaa: "+getArea());
 		System.out.println("Perimeter: "+getPerimeter());	
 	}
+	
 }

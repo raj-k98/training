@@ -1,23 +1,21 @@
 package com.trg.interfaces;
 
+import java.text.DecimalFormat;
+
 public class InterfaceMain {
 
 	public static void main(String[] args) {
 
 		Rectangle r = new Rectangle(34, 12);
-		// showDetails(r);
+		showDetails(r);
 
-		r.displayDetails();
-		
+		// r.displayDetails(); // calling default method of Shape interface
+
 		Square s = new Square(30.5);
-//		showDetails(s);
-		r.displayDetails();
-		
+		showDetails(s);
+
 		Circle c = new Circle(10.4);
-		// showDetails(c);
-
-		c.displayDetails();
-
+		showDetails(c);
 	}
 
 	static void showDetails(Shape s) {
@@ -31,7 +29,8 @@ public class InterfaceMain {
 		if (s instanceof Circle)
 			System.out.println("Shape: Circle");
 
-		System.out.println("Area: " + s.getArea());
-		System.out.println("Perimeter: " + s.getPerimeter());
+		DecimalFormat df = new DecimalFormat("00000.00");
+		System.out.println("Area: " + df.format(s.getArea()));
+		System.out.println("Perimeter: " + df.format(s.getPerimeter()));
 	}
 }
