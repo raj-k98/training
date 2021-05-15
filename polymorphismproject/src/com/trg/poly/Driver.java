@@ -17,7 +17,7 @@ public class Driver extends Employee{
 		this.licence = licence;
 	}
 
-	public int getBonusPercent() {
+  public int getBonusPercent() {
 		return 12;
 	}
 	

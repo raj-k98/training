@@ -1,10 +1,14 @@
 package com.trg.poly;
 
-public class Employee {
+abstract public class Employee {
 
 	private int empId;
 	private String name;
 	private float salary;
+
+	public Employee() {
+
+	}
 
 	public Employee(int empId, String name, float salary) {
 		super();
@@ -37,7 +41,6 @@ public class Employee {
 		this.salary = salary;
 	}
 
-	public int getBonusPercent() {
-		return 0;
-	}
+	abstract public int getBonusPercent();
+
 }
