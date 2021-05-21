@@ -1,5 +1,6 @@
 package com.trg.app.main;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,11 +14,7 @@ public class EmployeeMain {
 
 	public static void main(String[] args) {
 		EmpService service = new EmpServiceImpl();
-		/*
-		 * List<Employee> list = service.getAllemployees();
-		 * System.out.println("List of All Employees"); for (Employee e : list) {
-		 * System.out.println(e); }
-		 */
+
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter employee id to view Details");
 		int eid = sc.nextInt();
@@ -29,7 +26,7 @@ public class EmployeeMain {
 		else
 			System.out.println("Employee not found");
 
-		// Update alary of Employee salary
+		// Update salary of Employee
 
 		System.out.println("Enter Emp id to change salary");
 		eid = sc.nextInt();
@@ -42,6 +39,25 @@ public class EmployeeMain {
 			System.out.println(service.getEmployee(eid));
 		} catch (EmployeeNotFoundException | SalaryChangeException e1) {
 			System.out.println(e1.getMessage());
+		}
+
+		// Delete employee
+		System.out.println("enter employee id to delete");
+		eid = sc.nextInt();
+		try {
+			Employee e = service.removeEmployee(eid);
+			System.out.println("employee deleted --> " + e);
+		} catch (EmployeeNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+
+		
+		// List of employees after all operations
+		List<Employee> list = service.getAllemployees();
+		Collections.sort(list);
+		System.out.println("List of All Employees");
+		for (Employee e : list) {
+			System.out.println(e);
 		}
 
 		sc.close();
