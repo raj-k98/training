@@ -35,7 +35,6 @@ class ServiceTest {
 		Service service = new Service(mockDb);
 		assertEquals("Sudhir", service.getName(100));
 		assertEquals("Ambareesh", service.getName(200));
-
 	}
 
 }
