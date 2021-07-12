@@ -1,4 +1,4 @@
-package com.trg.crud.data;
+package com.trg.student.data;
 
 import java.time.LocalDate;
 

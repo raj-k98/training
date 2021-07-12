@@ -2,44 +2,45 @@ package com.trg.crud.data;
 
 import java.util.List;
 
+import com.trg.crud.exceptions.StudentException;
+import com.trg.student.data.Student;
+import com.trg.student.service.StudentService;
+import com.trg.student.service.StudentServiceImpl;
+
 public class StudentMain {
 
 	public static void main(String[] args) {
 		
-		StudentDao dao = new StudentDaoMapImpl();
-		List<Student> list = dao.getAllStudents();
+		StudentService service = new StudentServiceImpl();
+		
+		//getting one student
+	/*	
+		Student s= service.getStudent(800);
+		if(s==null) {
+			System.out.println("Not found");
+		}
+		else {
+			System.out.println(s);
+		}
+	
+*/
+		List<Student> list = service.getStudentsOnAge(20);
 		display(list);
 		
-		System.out.println("adding new student object");
-		boolean saved =dao.save(new Student(400,"abcd",null,34.5));
-		if(saved)
-			System.out.println("successfully saved");
-		else
-			System.out.println("duplicate student data");
+		System.out.println("List of qualified students");
 		
-		list=dao.getAllStudents();
-		display(list);
+		List<Student> qualified= service.getQulifiedStudents();
+		display(qualified);
 		
-		dao.delete(100);
+		try {
+			service.deleteStudent(189);
+			System.out.println("data deleted");
+		} catch (StudentException e) {
+			System.out.println(e.getMessage());
+		}
 		
-		Student st1=dao.getStudent(200);
-		if(st1==null)
-			System.out.println("not found");
-		else
-			System.out.println(st1);
+		System.out.println("Topper: "+service.getTopper());
 		
-		System.out.println("after delete 100");
-		list=dao.getAllStudents();
-		display(list);
-		
-		Student s= dao.getStudent(200);
-		s.setMarks(99.9);
-		dao.update(s);
-		System.out.println("after update");
-		
-		list=dao.getAllStudents();
-		display(list);
-
 	}
 
 	
