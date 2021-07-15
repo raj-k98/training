@@ -59,5 +59,16 @@
 		.map(e-> e.getFirstName()+" "+e.getLastName()+ " joined on "+e.getHireDate() + ", "+e.getHireDate().getDayOfWeek())
 		.forEach(System.out::println);
 		
-	
+// Name and salary and raised salary by 15%  
+		
+		emps.stream()
+		
+		.map(e-> e.getFirstName()+" "+e.getLastName()+ " Salary: "+e.getSalary() + " Raised Salary:  "+ String.format("%8.2f",  e.getSalary()*1.15 ) )
+		.forEach(System.out::println);
+		
+ //============List of departments not having employees=================
+			depts.stream()
+			    .filter(d-> (emps.stream().noneMatch(e->e.getDepartment() != null && e.getDepartment().getDepartmentId()==d.getDepartmentId())))
+			    .forEach(System.out::println); 
+	}
 			
