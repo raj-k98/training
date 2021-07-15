@@ -1,0 +1,63 @@
+
+
+		
+	//Total salary of all employees	
+		double sumOfSalary=
+		emps.stream()
+		.mapToDouble(Employee::getSalary)
+		.sum();
+		System.out.println(sumOfSalary);
+		
+		
+//•	List out department names and count of employees in each department. 
+		
+		Map<String,Long>  map=
+		emps.stream()
+		.filter(e-> e.getDepartment() != null)
+		.collect(Collectors.groupingBy(e-> e.getDepartment().getDepartmentname(),Collectors.counting()));
+
+		map.forEach( (k,v) -> System.out.println(k+ "  "+v));
+		
+//•  Details of senior most employee 
+		
+		Optional<Employee> opt = 
+				
+		emps.stream()
+		.sorted(Comparator.comparing(Employee::getHireDate))
+		.findFirst();
+		
+		if(opt.isPresent())
+		System.out.println(opt.get());
+		else
+			System.out.println("List is empty");
+			
+//•  List Of Employees with duration of service
+		
+			
+		emps.stream()
+		.forEach(e-> System.out.println(e.getFirstName()+" "+e.getLastName()+ " completed "+ 
+	          (
+	        Period.between(e.getHireDate(),LocalDate.now()).getYears() *12 
+	      + Period.between(e.getHireDate(),LocalDate.now()).getMonths())+ " months and "
+	          
+	          +Period.between(e.getHireDate(),LocalDate.now()).getDays()+" days"
+			));	 
+		
+		
+//•  Employees without department
+		
+		emps.stream()
+		.filter(e-> e.getDepartment() == null)
+		.forEach(System.out::println);
+		
+	
+			
+	//•  Employees who joined on Friday
+		
+		emps.stream()
+		.filter(e-> e.getHireDate().getDayOfWeek() == DayOfWeek.FRIDAY)
+		.map(e-> e.getFirstName()+" "+e.getLastName()+ " joined on "+e.getHireDate() + ", "+e.getHireDate().getDayOfWeek())
+		.forEach(System.out::println);
+		
+	
+			
