@@ -7,13 +7,14 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import com.cg.jpacrud.entities.Book;
+import com.cg.jpacrud.util.JpaUtil;
 
 public class BookDaoImpl implements BookDao {
 
 	private EntityManager entityManager;
 
 	public BookDaoImpl() {
-		entityManager = JPAUtil.getEntityManager();
+		entityManager = JpaUtil.getEntityManager();
 	}
 
 	

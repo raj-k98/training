@@ -1,10 +1,11 @@
-package com.cg.jpacrud.dao;
+package com.cg.jpacrud.util;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class JPAUtil {
+public class JpaUtil {
 
 	private static EntityManagerFactory factory;
 	private static EntityManager entityManager;
@@ -21,3 +22,4 @@ public class JPAUtil {
 	}
 	
 }
+
