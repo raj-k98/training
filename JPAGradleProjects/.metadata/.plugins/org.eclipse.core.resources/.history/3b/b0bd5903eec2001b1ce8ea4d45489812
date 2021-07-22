@@ -1,0 +1,5 @@
+package com.cg.jpacrud.util;
+
+public class JpaUtil {
+
+}
