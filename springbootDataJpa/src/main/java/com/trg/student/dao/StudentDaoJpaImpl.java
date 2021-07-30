@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jpa.StudentRepository;
 import com.trg.crud.exceptions.StudentException;
 import com.trg.student.data.Student;
-
 
 @Service
 public class StudentDaoJpaImpl implements StudentDao {
@@ -20,6 +21,7 @@ public class StudentDaoJpaImpl implements StudentDao {
 
 	@Override
 	public void save(Student s) throws StudentException {
+
 		if (repository.existsById(s.getStudentId()))
 			throw new StudentException("Student with id " + s.getStudentId() + "already exits");
 		else
@@ -49,16 +51,16 @@ public class StudentDaoJpaImpl implements StudentDao {
 	public Student getStudent(int sid) {
 
 		Optional<Student> opt = repository.findById(sid);
-		Student s = null;
 		if (opt.isPresent())
-			s = opt.get();
-		return s;
+			return opt.get();
+		else
+			return null;
 	}
 
 	@Override
 	public List<Student> getAllStudents() {
-		
-		ArrayList<Student> list =(ArrayList<Student>) repository.findAll();
+
+		ArrayList<Student> list = (ArrayList<Student>) repository.findAll();
 		return list;
 	}
 

@@ -7,6 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 @Entity
 @Table(name = "std_tbl")
 public class Student implements Comparable<Student> {
@@ -17,6 +22,7 @@ public class Student implements Comparable<Student> {
 	@Column(length = 20)
 	private String name;
 	@Column(name = "dateofbirth")
+
 	private LocalDate dateofBirth;
 	private double marks;
 

@@ -26,7 +26,6 @@ public class StudentController {
 	@Autowired
 	StudentService service;
 
-	//@RequestMapping(value = "{stdId}", method = RequestMethod.GET)
 	@GetMapping("{stdId}")
 	public ResponseEntity<?> getStudent(@PathVariable("stdId") int id) {
 
@@ -39,57 +38,47 @@ public class StudentController {
 		}
 	}
 
-	//@RequestMapping(method = RequestMethod.GET)
-	
+	// @RequestMapping(method = RequestMethod.GET)
+
 	@GetMapping
 	public List<Student> getAllStudents() {
 		List<Student> list = service.getAllStudents();
 		return list;
 	}
 
-	//@RequestMapping(value = "topper", method = RequestMethod.GET)
+	// @RequestMapping(value = "topper", method = RequestMethod.GET)
 	@GetMapping("topper")
 	public Student getTopper() {
 		Student s = service.getTopper();
 		return s;
 	}
 
-	
-	//@RequestMapping(method = RequestMethod.POST)
+	// @RequestMapping(method = RequestMethod.POST)
 	@PostMapping
 	public ResponseEntity<String> saveStudent(@RequestBody Student s) {
 
-		try {
-			service.saveStudent(s);
-			return new ResponseEntity<String>("Student with id " + s.getStudentId() + " saved successfully",
-					HttpStatus.CREATED);
-		} catch (StudentException e) {
-			return new ResponseEntity<String>("Save failure!!! "+e.getMessage(),HttpStatus.BAD_REQUEST);
-		}
+		service.saveStudent(s);
+
+		return new ResponseEntity<String>("Student with id " + s.getStudentId() + " saved successfully",
+				HttpStatus.CREATED);
 
 	}
 
 	@PutMapping
 	public ResponseEntity<String> updateStudent(@RequestBody Student s) {
 
-		try {
-			service.updateStudent(s);
-			return new ResponseEntity<String>("Student with id " + s.getStudentId() + " updated successfully",
-					HttpStatus.CREATED);
-		} catch (StudentException e) {
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
-		}
-	}
-	
-	@DeleteMapping("{sid}")
-	public ResponseEntity<String> deleteStudent(  @PathVariable("sid") int stdId) {
+		service.updateStudent(s);
+		return new ResponseEntity<String>("Student with id " + s.getStudentId() + " updated successfully",
+				HttpStatus.CREATED);
 
-		try {
-			service.deleteStudent(stdId);
-			return new ResponseEntity<String>("Student with id " + stdId + " deletedsuccessfully",	HttpStatus.OK);
-		} catch (StudentException e) {
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
-		}
 	}
-	
+
+	@DeleteMapping("{sid}")
+	public ResponseEntity<String> deleteStudent(@PathVariable("sid") int stdId) {
+
+		service.deleteStudent(stdId);
+		return new ResponseEntity<String>("Student with id " + stdId + " deletedsuccessfully", HttpStatus.OK);
+
+	}
+
 }
